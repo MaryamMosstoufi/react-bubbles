@@ -1,8 +1,10 @@
-import React, { useState } from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import PrivateRoute from './components/PrivateRoute';
 
-import Login from "./components/Login";
-//import "./styles.scss";
+import Login from './components/Login';
+import BubblesPage from './components/BubblePage';
+import AddColorForm from './components/AddColorForm';
 
 function App() {
   return (
@@ -18,7 +20,7 @@ function App() {
               <div className="uk-navbar-center">
                 <ul className="uk-navbar-nav">
                   <li><Link to='/login'>Login</Link></li>
-                  <li><Link to='/bubbles'>Bubbles</Link></li>
+                  <li><Link to='/bubbles'>Colors</Link></li>
                   <li><Link to='/addcolor'>Add Color</Link></li>
                 </ul>
               </div>
@@ -26,7 +28,12 @@ function App() {
           </div>  
         </div>
         <div className='uk-container uk-flex uk-flex-center'>
-          <Route exact path="/" component={Login} />
+          <Switch>
+            <PrivateRoute exact path='/colors' component={BubblesPage} />
+            <PrivateRoute exact path='/addcolor' component={AddColorForm} />
+            <Route path='/login' component={Login} />
+            <Route component={Login} />
+          </Switch>
         </div>
       </div>
     </Router>
