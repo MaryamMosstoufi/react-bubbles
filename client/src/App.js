@@ -20,7 +20,7 @@ function App() {
               <div className="uk-navbar-center">
                 <ul className="uk-navbar-nav">
                   <li><Link to='/login'>Login</Link></li>
-                  <li><Link to='/bubbles'>Colors</Link></li>
+                  <li><Link to='/colors'>Colors</Link></li>
                   <li><Link to='/addcolor'>Add Color</Link></li>
                 </ul>
               </div>
