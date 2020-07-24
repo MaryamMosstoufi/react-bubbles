@@ -28,7 +28,7 @@ function App() {
             </nav>
           </div>  
         </div>
-        <div className='uk-container uk-flex uk-flex-center'>
+        <div className='uk-container uk-flex uk-flex-center uk-margin-large-bottom'>
           <Switch>
             <PrivateRoute exact path='/colors' component={BubblesPage} />
             {/* <PrivateRoute exact path='/addcolor' component={AddColorForm} /> */}
