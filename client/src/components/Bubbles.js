@@ -13,10 +13,10 @@ const Bubbles = ({ colors }) => {
   }, [colors]);
 
   return (
-    <div className="bubble-wrap">
-      <p>bubbles</p>
-      <Svg width={400} height={800}>
-        <Group transform={{ translate: [40, 80] }}>
+    <div className="uk-margin-left uk-card uk-card-secondary uk-card-body">
+      <div className='uk-legend uk-text-center'>Bubbles</div>
+      <Svg width={400} height={400}>
+        <Group transform={{ translate: [40, 40] }}>
         <Cluster 
           data={{
             children: bubbleData

@@ -22,7 +22,7 @@ const BubblePage = () => {
   
   useEffect(() => {
     getColors()
-  }, []);
+  }, [colorList]);
  
   return (
     <div className='' data-uk-grid>
