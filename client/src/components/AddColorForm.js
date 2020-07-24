@@ -54,7 +54,7 @@ class AddColorForm extends React.Component {
                 name='color'
                 onChange={this.handleChange}
                 value={this.state.newColor.color}
-                placeholder='Color' />
+                placeholder='Color Name' />
             </div>
             <div className='uk-margin'>
               <input
@@ -63,10 +63,10 @@ class AddColorForm extends React.Component {
                 name='code'
                 onChange={this.handleChangeHex}
                 value={this.state.newColor.code.hex}
-                placeholder='Code' />
+                placeholder='Hex Code' />
             </div>
             <div className='uk-margin'>
-              <button className='uk-button uk-button-primary uk-width-1-1'>Submit</button>
+              <button className='uk-button uk-button-secondary uk-width-1-1'>Submit</button>
             </div>
           </fieldset>
         </form>

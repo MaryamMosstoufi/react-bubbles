@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { axiosWithAuth } from './../utils/axiosWithAuth';
+import { useParams, useHistory } from "react-router-dom";
 import AddColorForm from './AddColorForm';
 
 const initialColor = {
@@ -17,6 +18,7 @@ const ColorList = ({ colors, updateColors, getColors }) => {
     setEditing(true);
     setColorToEdit(color);
   };
+  const { push } = useHistory();
 
   const saveEdit = e => {
     e.preventDefault();
@@ -30,15 +32,19 @@ const ColorList = ({ colors, updateColors, getColors }) => {
 
   const deleteColor = color => {
     // make a delete request to delete this color
-    axiosWithAuth().delete(`/colors/${color.id}`, color)
-      .then(res => getColors())
+    axiosWithAuth()
+      .delete(`/colors/${color.id}`, color)
+      .then(res => {
+        getColors();
+      })
       .catch(err => console.log(err));
   };
 
   return (
-    <div className="colors-wrap">
-      <p>colors</p>
-      <ul>
+    <div>
+      <div className="uk-width-medium uk-card uk-card-default uk-card-body uk-margin-bottom">
+      <div className='uk-text-center uk-legend'>Colors</div>
+      <ul className='uk-list'>
         {colors.map(color => (
           <li key={color.color} onClick={() => editColor(color)}>
             <span>
@@ -47,32 +53,34 @@ const ColorList = ({ colors, updateColors, getColors }) => {
                     deleteColor(color)
                   }
                 }>
-                  x
+                <span className='uk-float-right' uk-icon="icon: trash"></span>
               </span>{" "}
               {color.color}
             </span>
             <div
-              className="color-box"
-              style={{ backgroundColor: color.code.hex }}
+              className="uk-float-left uk-margin-right"
+              style={{ backgroundColor: color.code.hex , width: '20px', height: '20px', display: 'inline-block'}}
             />
           </li>
         ))}
       </ul>
       {editing && (
         <form onSubmit={saveEdit}>
-          <legend>edit color</legend>
-          <label>
-            color name:
+          <legend className='uk-legend uk-text-center'>Edit Color</legend>
+          <div className='uk-margin'>
+              Color Name:
             <input
+              className='uk-input'
               onChange={e =>
                 setColorToEdit({ ...colorToEdit, color: e.target.value })
               }
               value={colorToEdit.color}
             />
-          </label>
-          <label>
-            hex code:
+          </div>
+          <div className='uk=margin'>
+              Hex Code:
             <input
+              className='uk-input'
               onChange={e =>
                 setColorToEdit({
                   ...colorToEdit,
@@ -81,14 +89,15 @@ const ColorList = ({ colors, updateColors, getColors }) => {
               }
               value={colorToEdit.code.hex}
             />
-          </label>
-          <div className="button-row">
-            <button type="submit">save</button>
-            <button onClick={() => setEditing(false)}>cancel</button>
+          </div>
+          <div className="uk-margin-top">
+            <button className='uk-button uk-button-default' onClick={() => setEditing(false)}>cancel</button>
+            <button className='uk-button uk-button-secondary uk-float-right' type="submit">save</button>
           </div>
         </form>
-      )}
-      <div className="spacer" />
+        )}
+      </div>
+      {/* <div className="spacer" /> */}
       {/* stretch - build another form here to add a color */}
       <AddColorForm />
     </div>
