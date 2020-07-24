@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Pack } from "@potion/layout";
-import { Svg, Circle } from "@potion/element";
+import { Cluster } from "@potion/layout";
+import { Svg, Circle, Group } from "@potion/element";
 
 const Bubbles = ({ colors }) => {
   const [bubbleData, setBubbleData] = useState([]);
@@ -13,17 +13,19 @@ const Bubbles = ({ colors }) => {
   }, [colors]);
 
   return (
-    <div className="bubble-wrap">
-      <p>bubbles</p>
+    <div className="uk-margin-left uk-card uk-card-secondary uk-card-body">
+      <div className='uk-legend uk-text-center'>Bubbles</div>
       <Svg width={400} height={400}>
-        <Pack
+        <Group transform={{ translate: [40, 40] }}>
+        <Cluster 
           data={{
             children: bubbleData
           }}
-          sum={datum => datum.value}
-          size={[400, 400]}
-          includeRoot={false}
-          nodeEnter={d => ({ ...d, r: 0 })}
+            //sum={datum => datum.value}
+            size={[240, 320]}
+          
+          //includeRoot={false}
+            nodeEnter={d => ({ ...d, x: 0, y: 0 })}
           animate
         >
           {nodes =>
@@ -35,7 +37,7 @@ const Bubbles = ({ colors }) => {
                       key={key}
                       cx={x}
                       cy={y}
-                      r={r}
+                      r={10}
                       fill={colors[i].code.hex}
                     />
                   );
@@ -44,7 +46,8 @@ const Bubbles = ({ colors }) => {
               })
               .filter(v => v)
           }
-        </Pack>
+          </Cluster >
+          </Group>
       </Svg>
     </div>
   );
